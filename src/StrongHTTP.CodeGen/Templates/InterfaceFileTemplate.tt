@@ -1,0 +1,25 @@
+﻿<#@ template language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+
+using System;
+
+using StrongHTTP;
+using StrongHTTP.Attributes;
+using StrongHTTP.Attributes.Request;
+using StrongHTTP.Attributes.Response;
+
+namespace <#= namespace #>
+{
+<# foreach(var service in services) { #>
+	public interface <#= service.name #> 
+	{
+<# foreach(var api in service.apis) { #>
+		[Method("<#= api.method #>")]
+		string <#= api.name #> ();
+<# } #>
+	}
+<# } #>
+}
