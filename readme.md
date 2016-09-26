@@ -8,7 +8,10 @@ Usage
 ```cs
 var g = G.Namespace("Rini.Game")
     .Service("player")
-        .Get("GetProfile", "profile");
+        .Get("GetProfile", "profile")
+            .ReturnAsync(typeof(Profile));
+            //.Return(typeof("Profile"))
+            //.Return("Profile")
 
 Console.WriteLine(g.Generate());
 ```
@@ -26,7 +29,7 @@ namespace Rini.Game
         public interface player
         {
                 [Method("GET")]
-                string GetProfile ();
+                Task<Profile> GetProfile ();
         }
 }
 ```
